@@ -46,9 +46,9 @@ mongoose
     .catch((error) => console.log(error))
 
 // Gracefull shutting down
-// process.on('uncaughtException', (err: Error) => {
-//     console.log({
-//         message: '[MAIN] Uncaught exception, shutting down...',
-//         error: err.stack,
-//     })
-// })
+process.on('uncaughtException', (err: Error) => {
+    console.log({
+        message: '[MAIN] Uncaught exception, shutting down...',
+        error: err.stack,
+    })
+})

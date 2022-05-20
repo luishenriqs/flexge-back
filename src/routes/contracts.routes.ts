@@ -11,8 +11,8 @@ contractsRoutes.post('/create', (request, response) =>
     createContractController.handle(request, response)
 )
 
-contractsRoutes.get('/list', (_, response) =>
-    listContractsController.handle(response)
+contractsRoutes.get('/list', (request, response) =>
+    listContractsController.handle(request, response)
 )
 
 contractsRoutes.get('/find', (request, response) =>

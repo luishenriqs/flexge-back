@@ -1,9 +1,18 @@
 import { Contract } from '../../../../models/Contract'
 
+interface IRequest {
+    page: number
+    limit: number
+}
+
 class ListContractsUseCase {
-    async execute() {
+    async execute({ page, limit }: IRequest) {
         try {
-            const response = await Contract.find().sort({ socialReason: 1 })
+            const skip = (page - 1) * limit
+            const response = await Contract.find()
+                .skip(skip)
+                .limit(limit)
+                .sort({ socialReason: 1 })
 
             return {
                 status: 200,

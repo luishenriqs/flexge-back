@@ -1,12 +1,18 @@
 import { Request, Response } from 'express'
-import { findByIdUseCase } from './findByIdUseCase'
+import { FindContractUseCase } from './FindContractUseCase'
 
-class FindByIdController {
+interface IRequest {
+    state?: string
+}
+
+class FindContractController {
     async handle(request: Request, response: Response): Promise<Response> {
         try {
-            const id = request.params.id
+            const { state } = request.query as IRequest
 
-            const resp = await new findByIdUseCase().execute(id)
+            const resp = await new FindContractUseCase().execute({
+                state,
+            })
 
             return response.status(resp.status).json(resp.message)
         } catch (error: any) {
@@ -16,4 +22,4 @@ class FindByIdController {
     }
 }
 
-export { FindByIdController }
+export { FindContractController }

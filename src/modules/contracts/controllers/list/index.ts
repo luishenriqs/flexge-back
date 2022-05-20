@@ -1,5 +1,5 @@
-import { ListContractController } from './ListContractController'
+import { ListContractsController } from './ListContractsController'
 
-const listContractController = new ListContractController()
+const listContractsController = new ListContractsController()
 
-export { listContractController }
+export { listContractsController }

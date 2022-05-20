@@ -1,10 +1,10 @@
 import { Response } from 'express'
-import { ListContractUseCase } from './ListContractUseCase'
+import { ListContractsUseCase } from './ListContractsUseCase'
 
-class ListContractController {
+class ListContractsController {
     async handle(response: Response): Promise<Response> {
         try {
-            const resp = await new ListContractUseCase().execute()
+            const resp = await new ListContractsUseCase().execute()
 
             return response.status(resp.status).json(resp.message)
         } catch (error: any) {
@@ -14,4 +14,4 @@ class ListContractController {
     }
 }
 
-export { ListContractController }
+export { ListContractsController }

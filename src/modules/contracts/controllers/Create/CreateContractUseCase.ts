@@ -10,6 +10,15 @@ class CreateContractUseCase {
                     message: 'The Social Reason field is required',
                 }
 
+            const alredyExists = await Contract.findOne({
+                socialReason: contract.socialReason,
+            })
+            if (alredyExists)
+                return {
+                    status: 400,
+                    message: 'This company already has a valid contract',
+                }
+
             const response = await Contract.create(contract)
 
             return {

@@ -1,13 +1,13 @@
 import { Contract } from '../../../../models/Contract'
 
-class ListContractUseCase {
-    async execute() {
+class DeleteUseCase {
+    async execute(id: string) {
         try {
-            const response = await Contract.find()
+            await Contract.deleteOne({ _id: id })
 
             return {
                 status: 200,
-                message: response,
+                message: 'Successfully deleted one contract.',
             }
         } catch (error) {
             console.log('error', error)
@@ -19,4 +19,4 @@ class ListContractUseCase {
     }
 }
 
-export { ListContractUseCase }
+export { DeleteUseCase }

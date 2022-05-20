@@ -1,9 +1,9 @@
 import { Contract } from '../../../../models/Contract'
 
-class findByIdUseCase {
-    async execute(id: string) {
+class ListContractsUseCase {
+    async execute() {
         try {
-            const response = await Contract.find({ _id: id })
+            const response = await Contract.find().sort({ socialReason: 1 })
 
             return {
                 status: 200,
@@ -19,4 +19,4 @@ class findByIdUseCase {
     }
 }
 
-export { findByIdUseCase }
+export { ListContractsUseCase }

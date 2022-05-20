@@ -1,7 +1,9 @@
 import { Router } from 'express'
 import { createContractController } from '../modules/contracts/controllers/Create'
-import { listContractController } from '../modules/contracts/controllers/list'
-import { findByIdController } from '../modules/contracts/controllers/findById'
+import { listContractsController } from '../modules/contracts/controllers/List'
+import { findContractController } from '../modules/contracts/controllers/FindContract'
+import { updateContractController } from '../modules/contracts/controllers/Update'
+import { deleteController } from '../modules/contracts/controllers/Delete'
 
 const contractsRoutes = Router()
 
@@ -10,11 +12,19 @@ contractsRoutes.post('/create', (request, response) =>
 )
 
 contractsRoutes.get('/list', (_, response) =>
-    listContractController.handle(response)
+    listContractsController.handle(response)
 )
 
-contractsRoutes.get('/findById/:id', (request, response) =>
-    findByIdController.handle(request, response)
+contractsRoutes.get('/find', (request, response) =>
+    findContractController.handle(request, response)
+)
+
+contractsRoutes.patch('/update', (request, response) =>
+    updateContractController.handle(request, response)
+)
+
+contractsRoutes.delete('/delete/:id', (request, response) =>
+    deleteController.handle(request, response)
 )
 
 export { contractsRoutes }

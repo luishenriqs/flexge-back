@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { createContractController } from '../modules/contracts/controllers/Create'
 import { listContractsController } from '../modules/contracts/controllers/List'
-import { findContractController } from '../modules/contracts/controllers/FindContract'
+import { findContractController } from '../modules/contracts/controllers/Find'
 import { updateContractController } from '../modules/contracts/controllers/Update'
 import { deleteController } from '../modules/contracts/controllers/Delete'
 

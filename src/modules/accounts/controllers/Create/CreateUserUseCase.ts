@@ -32,7 +32,7 @@ class CreateUserUseCase {
 
             return {
                 status: 201,
-                message: response,
+                message: { name: response.userName, email: response.email },
             }
         } catch (error) {
             console.log('error', error)

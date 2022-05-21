@@ -3,6 +3,8 @@ import { createUserController } from '../modules/accounts/controllers/Create'
 
 const accountsRoutes = Router()
 
-accountsRoutes.post('/create', createUserController.handle)
+accountsRoutes.post('/create', (request, response) =>
+    createUserController.handle(request, response)
+)
 
 export { accountsRoutes }

@@ -1,4 +1,6 @@
 import { Contract } from '../../../../models/Contract'
+import { AppError } from '../../../../utils/AppError'
+import { Validator } from '../../../../utils/Validator'
 
 interface IRequest {
     id: string
@@ -33,11 +35,8 @@ class UpdateContractUseCase {
         company,
     }: IRequest) {
         try {
-            if (!id)
-                return {
-                    status: 400,
-                    message: 'The Id field is required',
-                }
+            Validator({ id: String }, id)
+
             const contract = await Contract.findOne({ _id: id })
 
             if (country) contract.country = country
@@ -53,11 +52,18 @@ class UpdateContractUseCase {
             if (phone) contract.phone = Number(phone)
             if (company) contract.company = company
 
-            const response = await Contract.updateOne({ _id: id }, contract)
+            const contractUpdated = await Contract.updateOne(
+                { _id: id },
+                contract
+            )
+
+            if (contractUpdated.matchedCount === 0) {
+                return new AppError('Contract not found')
+            }
 
             return {
                 status: 200,
-                message: response,
+                message: contractUpdated,
             }
         } catch (error) {
             console.log('error', error)

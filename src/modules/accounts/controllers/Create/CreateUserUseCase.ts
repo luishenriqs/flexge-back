@@ -1,30 +1,25 @@
-import { Contract } from '../../../../models/Contract'
-
-interface IContract {
-    country: String
-    state: String
-    city: String
-    documentNumber: Number
-    socialReason: String
-    address: String
-    district: String
-    number: Number
-    zipCode: String
-    email: String
-    phone: Number
-    startsIn: Date
-    endsIn: Date
-    dueDay: Date
-    company: String
-}
-
+import { User } from '../../../../models/User'
+import { ICreateUserDTO } from './DTO'
+import { AppError } from '../../../../utils/AppError'
+import { Validator } from '../../../../utils/Validator'
 class CreateUserUseCase {
-    async execute(contract: IContract) {
+    async execute(user: ICreateUserDTO) {
         try {
-            const response = await Contract.create(contract)
+            Validator(
+                { userName: String, email: String, password: String },
+                user
+            )
+
+            const alredyExists = await User.findOne({
+                email: user.email,
+            })
+            if (alredyExists)
+                return new AppError('This user has already been registered')
+
+            const response = await User.create(user)
 
             return {
-                status: 200,
+                status: 201,
                 message: response,
             }
         } catch (error) {

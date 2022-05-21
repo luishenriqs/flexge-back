@@ -2,29 +2,19 @@ import { Request, Response } from 'express'
 import { CreateUserUseCase } from './CreateUserUseCase'
 
 interface IRequest {
-    country: String
-    state: String
-    city: String
-    documentNumber: Number
-    socialReason: String
-    address: String
-    district: String
-    number: Number
-    zipCode: String
+    userName: String
     email: String
-    phone: Number
-    startsIn: Date
-    endsIn: Date
-    dueDay: Date
-    company: String
+    password: String
+    created_at: Date
+    updated_at: Date
 }
 
 class CreateUserController {
     async handle(request: Request, response: Response): Promise<Response> {
         try {
-            const contract = request.body as IRequest
+            const user = request.body as IRequest
 
-            const resp = await new CreateUserUseCase().execute(contract)
+            const resp = await new CreateUserUseCase().execute(user)
 
             return response.status(resp.status).json(resp.message)
         } catch (error: any) {

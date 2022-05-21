@@ -15,6 +15,10 @@ function Validator(expect: Object | Array<string>, recived: Object): void {
     let recived_keys_expected = recived_keys.filter((a) =>
         expect_keys.includes(a)
     )
+    let recived_values_expected = recived_keys_expected.map((item) => {
+        let idx = recived_keys_expected.indexOf(item)
+        return recived_values[idx]
+    })
 
     // VERIFICA SE ITEM NÃO FOI ENVIADO
     expect_keys.forEach((key) => {
@@ -24,9 +28,9 @@ function Validator(expect: Object | Array<string>, recived: Object): void {
     })
 
     // VERIFICA SE ITEM ESTÁ VAZIO
-    recived_values.map((item) => {
+    recived_values_expected.map((item) => {
         if (!item) {
-            const idx = recived_values.indexOf(item)
+            const idx = recived_values_expected.indexOf(item)
             throw new AppError(
                 `This item ${recived_keys_expected[idx]} must be filled in with a valid value`
             )

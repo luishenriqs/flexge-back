@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 import { createUserController } from '../modules/accounts/controllers/Create'
-import { authenticateController } from '../modules/accounts/controllers/authenticate'
+import { authenticateController } from '../modules/accounts/controllers/Authenticate'
 import { listUserController } from '../modules/accounts/controllers/List'
 
 const accountsRoutes = Router()

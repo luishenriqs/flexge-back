@@ -14,7 +14,7 @@ accountsRoutes.post('/login', (request, response) =>
     authenticateController.handle(request, response)
 )
 
-accountsRoutes.get('/list', (_, response) =>
+accountsRoutes.get('/list', ensureAuthenticated, (_, response) =>
     listUserController.handle(response)
 )
 

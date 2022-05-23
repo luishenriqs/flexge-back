@@ -34,10 +34,8 @@ class AutheticateUseCase {
             )
 
             const tokenReturn = {
-                user: {
-                    userName: user.userName,
-                    email: user.email,
-                },
+                userName: user.userName,
+                email: user.email,
                 token,
             }
             return {
